@@ -1,6 +1,6 @@
 [submodule "multiworld"]
 	path = multiworld
-	url = https://github.com:thanhkaist/multiworld.git
+	url = https://github.com/thanhkaist/multiworld.git
 [submodule "sawyer_control"]
 	path = sawyer_control
-	url = https://github.com:thanhkaist/sawyer_control.git
+	url = https://github.com/thanhkaist/sawyer_control.git
