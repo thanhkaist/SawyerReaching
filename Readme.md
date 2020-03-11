@@ -1,14 +1,11 @@
 # Sawyer Reaching 
 
-## Requirement 
-1. ros_kinetic
-2. intera_interface_sdk
+## Install dependency 
+1. ros_kinetic + intera_interface_sdk \
 https://sdk.rethinkrobotics.com/intera/Workstation_Setup
-3. gazebo 
+2. gazebo \
 https://sdk.rethinkrobotics.com/intera/Gazebo_Tutorial
-4. install sawyer_control 
-5. install multiworld 
-
+3. install sawyer_control \
 Follow this[sawyer_control/README.md]
 Change this step 
 ```
@@ -23,7 +20,6 @@ Change this step
 pip install -r system_python_requirements.txt
 ```
 to
-
 ```
 pip install -r system_python_requirements.txt --no-deps
 ```
@@ -32,8 +28,13 @@ Note: you need to install sawyer_control to env with
 ```
 pip install -e .
 ```
-
-and run $python_path
+and run $python_path alias before you can use that package
+4. install multiworld
+Install multiworld package into your virtual env that you have created in step 3.
+```
+cd (SawyerReachingpath)/sawyer_control
+pip install -e .
+```
 
 ## Make a ros workspace 
 ```
