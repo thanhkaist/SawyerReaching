@@ -8,6 +8,7 @@ https://sdk.rethinkrobotics.com/intera/Gazebo_Tutorial
 3. install sawyer_control \
 Follow this [sawyer_control/README.md] \
 Remember: \
+
 * Change this step 
 ```
 run `git clone https://github.com/mdalal2020/sawyer_control.git` in ~/catkin_ws/src/
@@ -31,7 +32,7 @@ Note: you also need to install sawyer_control to your virtual env with
 cd (path to SawyerReaching)/sawyer_control
 pip install -e .
 ```
-and run $python_path alias before you can use that package \
+and run $python_path alias before you can use that package 
 
 4. install multiworld 
 
