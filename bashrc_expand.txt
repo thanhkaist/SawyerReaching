@@ -1,0 +1,19 @@
+alias actenv="source /opt/ros/kinetic/setup.bash; source ~/ros_ws/devel/setup.bash; export PYTHONPATH=~/ros_ws/devel/lib/python2.7/dist-packages:/opt/ros/kinetic/lib/python2.7/dist-packages:$PYTHONPATH"
+alias saw="cd ~/ros_ws/; ./intera.sh; cd ~/"
+alias saw2="cd ~/ros_ws/; ./intera2.sh; cd ~/"
+alias sawsim="cd ~/ros_ws/; ./intera.sh sim; cd ~/"
+alias enable="rosrun intera_interface enable_robot.py -e"
+alias disable="rosrun intera_interface enable_robot.py -d"
+alias reset="rosrun intera_interface enable_robot.py -r"
+alias stop="rosrun intera_interface enable_robot.py -S"
+alias status="rosrun intera_interface enable_robot.py -s"
+alias exp_nodes="roslaunch ~/ros_ws/src/sawyer_control/exp_nodes.launch"
+alias gazebo="roslaunch sawyer_sim_examples my_sawyer_pick_and_place_demo.launch"
+alias joint="rostopic echo -n 1 /robot/joint_states"
+alias endpoint="rostopic echo -n 1 /robot/limb/right/endpoint_state"
+
+# mujoco
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/aim/.mujoco/mujoco200/bin:/usr/lib/nvidia-384
+
+# glew initialization error missing gl version
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
