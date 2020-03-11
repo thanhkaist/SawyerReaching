@@ -1,5 +1,10 @@
 # Sawyer Reaching 
 
+## Update submodule
+
+git submodule init
+git submodule update
+
 ## Install dependency 
 1. ros_kinetic + intera_interface_sdk \
 https://sdk.rethinkrobotics.com/intera/Workstation_Setup
