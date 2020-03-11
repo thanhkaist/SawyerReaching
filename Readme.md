@@ -1,5 +1,49 @@
 # Sawyer Reaching 
 
+## Requirement 
+1. ros_kinetic
+2. intera_interface_sdk
+https://sdk.rethinkrobotics.com/intera/Workstation_Setup
+3. gazebo 
+https://sdk.rethinkrobotics.com/intera/Gazebo_Tutorial
+4. install sawyer_control 
+5. install multiworld 
+
+Follow this[sawyer_control/README.md]
+Change this step 
+```
+run `git clone https://github.com/mdalal2020/sawyer_control.git` in ~/catkin_ws/src/
+```
+to
+```
+ln -s (SawyerReachingpath)/sawyer_control .
+```
+Change this step
+```
+pip install -r system_python_requirements.txt
+```
+to
+
+```
+pip install -r system_python_requirements.txt --no-deps
+```
+
+Note: you need to install sawyer_control to env with 
+```
+pip install -e .
+```
+
+and run $python_path
+
+## Make a ros workspace 
+```
+cd ~
+mkdir rl_ws/src
+cd rl_ws
+catkin_make
+```
+
+## 
 
 
 ## Working on real robot
