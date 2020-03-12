@@ -43,10 +43,9 @@ and run $python_path alias before you can use that package
 
 Install multiworld package into your virtual env that you have created in step 3.
 ```
-cd (path to SawyerReaching)/sawyer_control
+cd (path to SawyerReaching)/multiworld
 pip install -e .
 ```
- 
 
 ## Working on real robot
 
