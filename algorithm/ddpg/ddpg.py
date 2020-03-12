@@ -5,7 +5,7 @@ import time
 import os
 import core
 from tensorboardX import SummaryWriter
-from spinup.algos.ddpg.core import get_vars
+from core import get_vars
 from spinup.utils.logx import EpochLogger
 from tqdm import tqdm
 from spinup.utils.mpi_tools import mpi_statistics_scalar
@@ -20,8 +20,8 @@ from utils import tensorboard_log
 
 
 # For Sawyer
-from multiworld.envs.mujoco import register_mujoco_envs as register_goal_example_envs
-register_goal_example_envs()
+from multiworld.envs.mujoco import register_reaching_envs as register_reaching_envs
+register_reaching_envs()
 
 try:
     from multiworld.core.image_env import ImageEnv
@@ -343,7 +343,7 @@ if __name__ == '__main__':
 
     logdir_ext = os.path.join(args.logdir + '_' + args.env)
     if not os.path.exists(logdir_ext):
-        os.mkdir(logdir_ext)
+        os.makedirs(logdir_ext,exist_ok=True)
 
     tensor_board = SummaryWriter(logdir_ext)
 

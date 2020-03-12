@@ -32,7 +32,7 @@ to
 pip install -r system_python_requirements.txt --no-deps
 ```
 
-Note: you also need to install sawyer_control to your virtual env with 
+Note: you also need to install sawyer_control to your virtual env (e.g my_env) with 
 ```
 cd (path to SawyerReaching)/sawyer_control
 pip install -e .
@@ -41,12 +41,57 @@ and run $python_path alias before you can use that package
 
 4. install multiworld 
 
-Install multiworld package into your virtual env that you have created in step 3.
+Install multiworld package into your virtual env (e.g my_env) that you have created in step 3.
 ```
 cd (path to SawyerReaching)/multiworld
 pip install -e .
 ```
 
+5. install algorithm dependency 
+
+```
+cd (path to SawyerReaching)
+pip install -r requirement
+```
+
+
+## Training algorithm 
+### Working with simulation
+
+Useful alias 
+```
+alias ros_enable="source /opt/ros/kinetic/setup.bash; source ~/rl_ws/devel/setup.bash"
+alias saw_sim="ros_enable; ./intera.sh sim"
+alias saw="cd ~/ros_ws/; ./intera.sh; cd ~/"
+alias exp_nodes="roslaunch ~/ros_ws/src/sawyer_control/exp_nodes.launch"
+alias python_path="export PYTHONPATH=/home/$your_user$/miniconda2/envs/rl_ros/lib/python3.5/site-packages:$PYTHONPATH:/opt/ros/kinetic/lib/python2.7/dist-packages/"
+```
+Run sawyer gazebo
+```
+saw_sim
+roslaunch sawyer_gazebo sawyer_world
+```
+Run control nodes (in another terminal)
+```
+saw_sim
+exp_node
+```
+Run visualization nodes if needed (in another terminal)
+```
+saw_sim
+roslauch ~/ros_ws/src/sawyer_control/main.launch
+```
+In rviz, File->Open Config-> (path to SawyerReaching)/reachingXYZ.rviz
+
+Train your algorithm (in another terminal)
+```
+saw_sim
+conda activate my_env
+python_path
+cd (path to SawyerReaching)/algorithm/ddpg
+python ddpg --env $name$
+
+```
 ## Working on real robot
 
 Step 1: 
