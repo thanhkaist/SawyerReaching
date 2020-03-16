@@ -3,14 +3,15 @@ import sys
 sys.path.append('../')
 from utils import load_policy, run_policy
 from tensorboardX import SummaryWriter
-from spinup.utils.run_utils import setup_logger_kwargs
+from util.run_utils import setup_logger_kwargs
 import os
 
 # For Sawyer
-from multiworld.envs.mujoco import register_mujoco_envs as register_goal_example_envs
+from multiworld.envs.mujoco import register_reaching_envs as register_reaching_envs
+register_reaching_envs()
 from multiworld.core.flat_goal_env import FlatGoalEnv
 
-register_goal_example_envs()
+
 
 if __name__ == '__main__':
     import argparse
@@ -28,10 +29,22 @@ if __name__ == '__main__':
     parser.add_argument('--env', type=str, default='SawyerReachXYEnv-v1')
     args = parser.parse_args()
 
-    env, get_action = load_policy(args.saved_model,
+    _, get_action = load_policy(args.saved_model,
                                   args.itr if args.itr >= 0 else 'last',
                                   args.deterministic)
     tensor_board = None
+    env = SawyerReachXYZEnv(
+            action_mode='position',
+            position_action_scale=0.1,
+            config_name='austri_config',
+            reset_free=False,
+            max_speed=0.05,
+            fix_goal=False,
+            fixed_goal=(0.53,0.0,0.15)
+        )
+
+    env = FlatGoalEnv(env, append_goal_to_obs=True)
+    env.reset()
     logdir_ext = os.path.join(args.logdir + '_' + args.env + '_evaluate')
     if not os.path.exists(logdir_ext):
         os.mkdir(logdir_ext)

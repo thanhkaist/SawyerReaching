@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 import numpy as np
 import tensorflow as tf
 import gym
@@ -6,16 +8,14 @@ import os
 import core
 from tensorboardX import SummaryWriter
 from core import get_vars
-from spinup.utils.logx import EpochLogger
+from util.logx import EpochLogger
 from tqdm import tqdm
-from spinup.utils.mpi_tools import mpi_statistics_scalar
+from util.mpi_tools import mpi_statistics_scalar
 from multiworld.envs.real_world.sawyer.sawyer_reaching import SawyerReachXYZEnv
 from multiworld.core.flat_goal_env import FlatGoalEnv
 
 print("import completed")
 
-import sys
-sys.path.append('../')
 from utils import tensorboard_log
 
 
@@ -331,7 +331,7 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--env', type=str, default='SawyerReachXYZEnv_multi_real_2')
+    parser.add_argument('--env', type=str, default='SawyerReachXYZEnv_multi_real_2_test')
     parser.add_argument('--hid', type=int, default=300)
     parser.add_argument('--l', type=int, default=3)
     parser.add_argument('--gamma', type=float, default=0.99)
@@ -346,8 +346,7 @@ if __name__ == '__main__':
         os.makedirs(logdir_ext,exist_ok=True)
 
     tensor_board = SummaryWriter(logdir_ext)
-
-    from spinup.utils.run_utils import setup_logger_kwargs
+    from util.run_utils import setup_logger_kwargs
 
     logger_kwargs = setup_logger_kwargs(exp_name=args.exp_name, seed=args.seed, data_dir=logdir_ext)
 
