@@ -56,16 +56,25 @@ pip install -r requirement
 
 
 ## Training algorithm 
-### Working with simulation
+### Requirement 
 
-Useful alias 
+Install algorithm dependency
+```
+conda activate my_env
+pip install -r algorithm/requirement.txt
+```
+
+Add useful alias to ~/.bashrc
 ```
 alias ros_enable="source /opt/ros/kinetic/setup.bash; source ~/rl_ws/devel/setup.bash"
 alias saw_sim="ros_enable; ./intera.sh sim"
-alias saw="cd ~/ros_ws/; ./intera.sh; cd ~/"
+alias saw="cd ~/ros_ws/; ros_enable; ./intera.sh "
 alias exp_nodes="roslaunch ~/ros_ws/src/sawyer_control/exp_nodes.launch"
 alias python_path="export PYTHONPATH=/home/$your_user$/miniconda2/envs/rl_ros/lib/python3.5/site-packages:$PYTHONPATH:/opt/ros/kinetic/lib/python2.7/dist-packages/"
 ```
+
+### Working with simulation
+
 Run sawyer gazebo
 ```
 saw_sim
@@ -92,50 +101,44 @@ cd (path to SawyerReaching)/algorithm/ddpg
 python ddpg --env $name$
 
 ```
-## Working on real robot
 
-Step 1: 
+Test your algorithm
+
+```
+saw_sim
+conda activate my_env
+python_path
+cd (path to SawyerReaching)/algorithm/ddpg
+python ddpg_test 
+
+```
+
+### Working on real robot
+ 
 Set up parameters for the hand-eye camera
 ```
-actenv
-saw2
+saw
 rosrun intera_examples camera_display.py -c right_hand_camera -x 10 -g 10
 ```
 
-Step 2:
-Launch environment
+Run control nodes (in another terminal)
 ```
-roslaunch sawyer_reach main.launch
+saw
+exp_node
 ```
 
-Step 3:
+Run visualization nodes and vision node (in another terminal)
 ```
-cd ~/SawyerReaching/algorithm/ddpg
+saw
+roslauch ~/ros_ws/src/sawyer_control/main.launch
+```
+
+Run grasping (in another terminal)
+```
+saw
+conda activate my_env
+python_path
+cd (path to SawyerReaching)/algorithm/ddpg
 python  grasp_server.py
 ```
---> run subscriber
 
-Step 4:
-```
-actenv
-saw2
-exp_nodes
-source activate thanh
-export PYTHONPATH=~/anaconda2/envs/thanh/lib/python3.6/site-packages:/usr/lib/python3/dist-packages:~/hieu_ws/devel/lib/python2.7/dist-packages:/opt/ros/kinetic/lib/python2.7/dist-packages
-cd ~/thanh_code/sawyer/ddpg
-python object_grasping.py
-```
-
-```
-(thanh) [intera - http://021709CP00082.local:11311] hsbk@HSBK:~/thanh_code/sawyer/ddpg$ python markemultiworld_multi_test_policy.py
-```
-
-To create environment, check requirements.txt file
-
-Dependencies:
-
-- sawyer_control : configs are changed
-- multiworld
-- sawyer_thanh: for get ar pose marker
-- spinningup
-- sawyer folder: source code for training and testing
