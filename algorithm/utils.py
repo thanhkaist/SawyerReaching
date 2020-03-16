@@ -4,7 +4,7 @@ import os
 import os.path as osp
 import tensorflow as tf
 from util.logx import Logger, EpochLogger
-from util.logx import restore_tf_graph
+from util.logx import restore_tf_graph, colorize
 from util.mpi_tools import mpi_statistics_scalar
 
 
