@@ -4,7 +4,7 @@ import os
 import os.path as osp
 import tensorflow as tf
 from spinup import EpochLogger
-from spinup.utils.logx import restore_tf_graph
+from spinup.utils.logx import restore_tf_graph, colorize
 from spinup.utils.mpi_tools import mpi_statistics_scalar
 
 
@@ -34,13 +34,12 @@ def load_policy(fpath, itr='last', deterministic=False):
 
     # try to load environment from save
     # (sometimes this will fail because the environment could not be pickled)
-    # try:
-    #     state = joblib.load(osp.join(fpath, 'vars' + itr + '.pkl'))
-    #     env = state['env']
-    # except:
-    #     env = None
-    
-    env = None
+    try:
+        state = joblib.load(osp.join(fpath, 'vars' + itr + '.pkl'))
+        env = state['env']
+    except:
+        env = None
+
     return env, get_action
 
 
@@ -53,6 +52,13 @@ def run_policy(env, get_action, max_ep_len=None, num_episodes=100, render=True, 
 
     logger = EpochLogger(**logger_kwargs)
     o, r, d, ep_ret, ep_len, n = env.reset(), 0, False, 0, 0, 0
+    goal = env._state_goal
+    print(colorize(
+        "**The goal position: (x, y, z) = ({:.4}, {:.4}, {:.4})".format(float(goal[0]), float(goal[1]), float(goal[2])),
+        color='green', bold=True))
+    # print('Press enter to start!')
+    # input()
+
     while n < num_episodes:
         if render:
             env.render()
@@ -66,7 +72,12 @@ def run_policy(env, get_action, max_ep_len=None, num_episodes=100, render=True, 
         if d or (ep_len == max_ep_len):
             logger.store(EpRet=ep_ret, EpLen=ep_len)
             print('Episode %d \t EpRet %.3f \t EpLen %d' % (n, ep_ret, ep_len))
-            o, r, d, ep_ret, ep_len = env.reset(), 0, False, 0, 0
+            print(colorize(
+                "The current position of the end of effector: (x_c, y_c, z_c) = ({:.4}, {:.4}, {:.4})".format(o[0],
+                                                                                                              o[1],
+                                                                                                              o[2]),
+                'cyan', bold=True))
+
             n += 1
 
             if tensor_board is not None:

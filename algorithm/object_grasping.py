@@ -47,10 +47,20 @@ class ObjectGrasping:
                                  -2.4536884765625, -1.90233984375, -2.909759765625, -2.622689453125]
         self.angle_init_for_grasp = [0.51219827, -0.35472363, -0.69057131, 1.43175006, -2.19978213,
                                      -0.83249319, -1.90052831]
-        self.angle_for_place_object = [-0.27847949, 0.27943164, -1.41711915, 0.73744339,
-                                       -1.4784863, -1.23393261, -2.38949132]
+        self.angle_for_place_object = [-0.34514549, 0.24693164, -1.2170068, 1.22242475, 1.65923345,
+                                       1.15603614, 0.06596191]
         self.msg_close = True
         self.msg_open = False
+
+        env = SawyerReachXYZEnv(
+            action_mode='position',
+            position_action_scale=0.1,
+            config_name='austri_config',
+            reset_free=False,
+            max_speed=0.05,
+            fix_goal=True,
+        )
+        self.env = FlatGoalEnv(env, append_goal_to_obs=True)
 
         os.system('clear')
         print('[AIM-INFO] Initializing robotic grasping...')
@@ -99,16 +109,19 @@ class ObjectGrasping:
     def get_object_location(self):
         obj_pos_cam_frame = self.locate_object()  # w.r.t. camera frame
 
-        print("[AIM-DEBUG] Object in camera frame: {}".format(obj_pos_cam_frame[:3]))
+        print("[AIM-DEBUG] Object in camera frame: (%.4f, %.4f, %.4f)" % (
+            obj_pos_cam_frame[0], obj_pos_cam_frame[1], obj_pos_cam_frame[2]))
         if self.use_hand_cam:
             obj_pos_based_frame = list(obj_pos_cam_frame)
         else:
             obj_pos_homo = np.hstack([obj_pos_cam_frame, 1])
             obj_pos_based_frame = np.matmul(self.TRANSFORMATION_MATRIX, obj_pos_homo)
 
-        print("[AIM-DEBUG] Object in based frame: {}".format(obj_pos_based_frame[:3]))
-        obj_pos_based_frame[2] = obj_pos_based_frame[2] + 0.25
-        print("[AIM-DEBUG] Object in based frame with offset: {}".format(obj_pos_based_frame[:3]))
+        print("[AIM-DEBUG] Object in based frame: (%.4f, %.4f, %.4f)" % (
+            obj_pos_based_frame[0], obj_pos_based_frame[1], obj_pos_based_frame[2]))
+        obj_pos_based_frame[2] = obj_pos_based_frame[2] + 0.15
+        print("[AIM-DEBUG] Object in based frame with offset: (%.4f, %.4f, %.4f)" % (
+            obj_pos_based_frame[0], obj_pos_based_frame[1], obj_pos_based_frame[2]))
 
         return list(obj_pos_based_frame[:3])
 
@@ -118,23 +131,16 @@ class ObjectGrasping:
         execute_action(data)
 
     def move_to_pos(self, goal):
-        env = SawyerReachXYZEnv(
-            action_mode='position',
-            position_action_scale=0.1,
-            config_name='austri_config',
-            reset_free=False,
-            max_speed=0.05,
-            fix_goal=True,
-            fixed_goal=goal
-        )
-
-        env = FlatGoalEnv(env, append_goal_to_obs=True)
-        env.reset()
-        run_policy(env, get_action, 15, 1, False)
+        self.env.wrapped_env._state_goal = np.array(goal)
+        print('[AIM-INFO] Moving to reset position...')
+        for _ in range(5):
+            self.env.reset()
+        print('[AIM-INFO] Starting move to target position...')
+        run_policy(self.env, get_action, 15, 1, False)
 
 
 def main():
-    grasp = ObjectGrasping(use_hand_cam=False)
+    grasp = ObjectGrasping(use_hand_cam=True)
 
     grasp.request_grasp(grasp.msg_open)  # Open gripper
     obj_pos = grasp.get_object_location()
