@@ -350,7 +350,7 @@ if __name__ == '__main__':
 
     logger_kwargs = setup_logger_kwargs(exp_name=args.exp_name, seed=args.seed, data_dir=logdir_ext)
 
-    ddpg(lambda: SawyerReachXYZEnv(action_mode='position',config_name='austri_config',reset_free=False,position_action_scale=0.1,max_speed=0.05,fixed_goal=(0.53,0.0,0.15), fix_goal=False), actor_critic=core.mlp_actor_critic,
+    ddpg(lambda: SawyerReachXYZEnv(action_mode='torque',config_name='austri_config',reset_free=False,position_action_scale=0.1,max_speed=0.05,fixed_goal=(0.53,0.0,0.15), fix_goal=False), actor_critic=core.mlp_actor_critic,
          ac_kwargs=dict(hidden_sizes=[args.hid] * args.l),
          gamma=args.gamma, seed=args.seed, epochs=args.epochs,
          logger_kwargs=logger_kwargs, tensor_board=tensor_board)

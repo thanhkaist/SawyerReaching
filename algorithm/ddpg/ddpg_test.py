@@ -19,7 +19,7 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--saved_model', type=str, default='./logs/ddpg_test_SawyerReachXYZEnv_multi_real_2/ddpg/ddpg_s0')
+    parser.add_argument('--saved_model', type=str, default='./logs/ddpg_test_SawyerReachXYZEnv_multi_real_2_test/ddpg/ddpg_s0')
     parser.add_argument('--len', '-l', type=int, default=50)
     parser.add_argument('--episodes', '-n', type=int, default=50)
     parser.add_argument('--render', '-nr', action='store_true')
@@ -35,7 +35,7 @@ if __name__ == '__main__':
                                   args.itr if args.itr >= 0 else 'last',
                                   args.deterministic)
     env = SawyerReachXYZEnv(
-            action_mode='position',
+            action_mode='torque',
             position_action_scale=0.1,
             config_name='austri_config',
             reset_free=False,
