@@ -1,5 +1,12 @@
 # Sawyer Reaching 
 
+## Install sourcecode
+```
+mkdir ~/ee331 && cd ~/ee331
+git clone https://github.com/thanhkaist/SawyerReaching.git
+cd SawyerReaching
+```
+
 ## Update submodule
 ```
 git submodule init
@@ -12,8 +19,8 @@ https://sdk.rethinkrobotics.com/intera/Workstation_Setup
 https://sdk.rethinkrobotics.com/intera/Gazebo_Tutorial
 3. install sawyer_control \
 Follow this [sawyer_control/README.md] \
-Remember: \
-
+Remember: 
+* Use your (path to ros_ws)/src instead of ~/catkin_ws/src \
 * Change this step 
 ```
 run `git clone https://github.com/mdalal2020/sawyer_control.git` in ~/catkin_ws/src/
@@ -31,7 +38,7 @@ to
 ```
 pip install -r system_python_requirements.txt --no-deps
 ```
-
+* No need to install kinect2 bridge (step 14) \
 Note: you also need to install sawyer_control to your virtual env (e.g my_env) with 
 ```
 cd (path to SawyerReaching)/sawyer_control
@@ -70,7 +77,7 @@ alias ros_enable="source /opt/ros/kinetic/setup.bash; source ~/rl_ws/devel/setup
 alias saw_sim="ros_enable; ./intera.sh sim"
 alias saw="cd ~/ros_ws/; ros_enable; ./intera.sh "
 alias exp_nodes="roslaunch ~/ros_ws/src/sawyer_control/exp_nodes.launch"
-alias python_path="export PYTHONPATH=/home/$your_user$/miniconda2/envs/rl_ros/lib/python3.5/site-packages:$PYTHONPATH:/opt/ros/kinetic/lib/python2.7/dist-packages/"
+alias python_path="export PYTHONPATH=/home/$your_user$/miniconda2/envs/$your_env$/lib/python3.5/site-packages:$PYTHONPATH:/opt/ros/kinetic/lib/python2.7/dist-packages/"
 ```
 
 ### Working with simulation
