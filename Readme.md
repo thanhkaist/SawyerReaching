@@ -77,7 +77,7 @@ alias python_path="export PYTHONPATH=/home/$your_user$/miniconda2/envs/$ros_ws$/
 Run sawyer gazebo
 ```
 saw_sim
-roslaunch sawyer_gazebo sawyer_world
+roslaunch sawyer_gazebo sawyer_world.launch
 ```
 Run control nodes (in another terminal)
 ```
