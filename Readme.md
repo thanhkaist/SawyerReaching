@@ -65,11 +65,11 @@ pip install -r algorithm/requirement.txt
 
 Add useful alias to ~/.bashrc
 ```
-alias ros_enable="source /opt/ros/kinetic/setup.bash; source ~/rl_ws/devel/setup.bash"
+alias ros_enable="source /opt/ros/kinetic/setup.bash; source ~/$ros_ws$/devel/setup.bash"
 alias saw_sim="ros_enable; ./intera.sh sim"
 alias saw="cd ~/ros_ws/; ros_enable; ./intera.sh "
 alias exp_nodes="roslaunch ~/ros_ws/src/sawyer_control/exp_nodes.launch"
-alias python_path="export PYTHONPATH=/home/$your_user$/miniconda2/envs/$your_env$/lib/python3.5/site-packages:$PYTHONPATH:/opt/ros/kinetic/lib/python2.7/dist-packages/"
+alias python_path="export PYTHONPATH=/home/$your_user$/miniconda2/envs/$ros_ws$/lib/python3.5/site-packages:$PYTHONPATH:/opt/ros/kinetic/lib/python2.7/dist-packages/"
 ```
 
 ### Working with simulation
