@@ -54,14 +54,6 @@ cd (path to SawyerReaching)/multiworld
 pip install -e .
 ```
 
-5. install algorithm dependency 
-
-```
-cd (path to SawyerReaching)
-pip install -r requirement
-```
-
-
 ## Training algorithm 
 ### Requirement 
 
