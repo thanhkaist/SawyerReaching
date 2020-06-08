@@ -73,6 +73,7 @@ alias python_path="export PYTHONPATH=/home/$your_user$/miniconda2/envs/$ros_ws$/
 ```
 
 ### Working with simulation
+Note: For all command below, make sure you current working directory in $ros_ws$
 
 Run sawyer gazebo
 ```
