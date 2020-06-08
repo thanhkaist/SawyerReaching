@@ -1,3 +1,6 @@
 gym==0.14.0
 tensorboardX==1.0
 tensorflow==1.9.0
+netifaces
+opencv-python
+rospkg
