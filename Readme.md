@@ -83,7 +83,7 @@ roslaunch sawyer_gazebo sawyer_world.launch
 Run control nodes (in another terminal)
 ```
 saw_sim
-exp_node
+exp_nodes
 ```
 Run visualization nodes if needed (in another terminal)
 ```
@@ -98,7 +98,7 @@ saw_sim
 conda activate my_env
 python_path
 cd (path to SawyerReaching)/algorithm/ddpg
-python ddpg --env $name$
+python ddpg.py --env $name$
 
 ```
 
@@ -109,7 +109,7 @@ saw_sim
 conda activate my_env
 python_path
 cd (path to SawyerReaching)/algorithm/ddpg
-python ddpg_test 
+python ddpg_test.py 
 
 ```
 
@@ -124,13 +124,13 @@ rosrun intera_examples camera_display.py -c right_hand_camera -x 10 -g 10
 Run control nodes (in another terminal)
 ```
 saw
-exp_node
+exp_nodes
 ```
 
 Run visualization nodes and vision node (in another terminal)
 ```
 saw
-roslauch ~/ros_ws/src/sawyer_control/main.launch
+roslaunch ~/ros_ws/src/sawyer_control/main.launch
 ```
 
 Run grasping (in another terminal)
@@ -138,7 +138,7 @@ Run grasping (in another terminal)
 saw
 conda activate my_env
 python_path
-cd (path to SawyerReaching)/algorithm/ddpg
-python  grasp_server.py
+cd (path to SawyerReaching)/algorithm
+python  grasp_object.py
 ```
 
