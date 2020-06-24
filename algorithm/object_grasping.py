@@ -17,7 +17,7 @@ from multiworld.core.flat_goal_env import FlatGoalEnv
 register_goal_example_envs()
 
 import rospy
-from sawyer_thanh.srv import target, targetResponse, targetRequest
+from sawyer_control.srv import target, targetResponse, targetRequest
 from sawyer_control.srv import grasping
 from sawyer_control.srv import angle_action
 
